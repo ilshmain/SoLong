@@ -8,6 +8,7 @@
 # include	<fcntl.h>
 # include	<stdio.h>
 # include	<stddef.h>
+# include	<time.h>
 # include	<mlx.h>
 
 typedef struct st_pam
@@ -24,6 +25,8 @@ typedef struct st_pam
 
 typedef struct s_vars
 {
+	int		frame;
+	int		time;
 	int		height;
 	int		count;
 	char	**var_map;
@@ -36,6 +39,7 @@ typedef struct s_vars
 	void	*img_eva_white;
 	void	*img_enemy;
 	void	*img_vrag;
+	void	*img_vrag1;
 	void	*img_barrier;
 	void	*img_space;	
 	int		img_width;
@@ -61,6 +65,7 @@ void	*ft_calloc(size_t count, size_t size);
 void	*ft_memset(void *b, int c, size_t len);
 char	*ft_strdup(const char *s1);
 char	*ft_itoa(int n);
+int		animation(t_vars *vars);
 
 void	check_map_name(char *map_name);
 void	check_other_wall(t_map *lst);
@@ -74,5 +79,6 @@ void	move_person(t_vars *vars, int keycode);
 void	image_position(t_map *lst, t_vars *vars);
 void	move(t_vars *vars, int move);
 void	move_robots(t_vars *vars, char s, int x, int y);
+void	image_print(char a, t_vars *vars, int i, int k);
 
 #endif

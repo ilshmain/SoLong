@@ -24,6 +24,7 @@ void	move_robots_1(t_vars *vars, char s, int x, int y)
 			printf("<<<YOU LOSE>>>\n");
 			exit(1);
 		}
+		vars->count++;
 		vars->img = mlx_xpm_file_to_image(vars->mlx, vars->img_person, \
 		&vars->img_width, &vars->img_height);
 		mlx_put_image_to_window(vars->mlx, vars->win, \
@@ -45,7 +46,6 @@ void	move_robots(t_vars *vars, char s, int x, int y)
 {
 	static char	*step;
 
-	vars->count++;
 	step = ft_itoa(vars->count);
 	vars->img = mlx_xpm_file_to_image(vars->mlx, vars->img_cub, \
 	 &vars->img_width, &vars->img_height);
@@ -53,9 +53,9 @@ void	move_robots(t_vars *vars, char s, int x, int y)
 	1.2 * 64, vars->height * 65);
 	mlx_string_put(vars->mlx, vars->win, 80, vars->height * 65, \
 	0x00FFFFFF, step);
+	move_robots_1(vars, s, x, y);
 	free(step);
 	printf("Step: %d\n", vars->count);
-	move_robots_1(vars, s, x, y);
 }
 //
 
