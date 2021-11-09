@@ -15,6 +15,15 @@ void	move_robots_2(t_vars *vars, char s)
 	}
 }
 
+void	PechatNaStdout(t_vars *vars, char s)
+{
+	if (s != '1')
+	{
+		vars->count++;
+		printf("Step: %d\n", vars->count);
+	}
+}
+
 void	move_robots_1(t_vars *vars, char s, int x, int y)
 {
 	if (s == '0' || s == 'G' || s == 'V')
@@ -24,7 +33,7 @@ void	move_robots_1(t_vars *vars, char s, int x, int y)
 			printf("<<<YOU LOSE>>>\n");
 			exit(1);
 		}
-		vars->count++;
+		PechatNaStdout(vars, s);
 		vars->img = mlx_xpm_file_to_image(vars->mlx, vars->img_person, \
 		&vars->img_width, &vars->img_height);
 		mlx_put_image_to_window(vars->mlx, vars->win, \
@@ -46,16 +55,15 @@ void	move_robots(t_vars *vars, char s, int x, int y)
 {
 	static char	*step;
 
-	step = ft_itoa(vars->count);
 	vars->img = mlx_xpm_file_to_image(vars->mlx, vars->img_cub, \
 	 &vars->img_width, &vars->img_height);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img, \
 	1.2 * 64, vars->height * 65);
-	mlx_string_put(vars->mlx, vars->win, 80, vars->height * 65, \
-	0x00FFFFFF, step);
 	move_robots_1(vars, s, x, y);
+	step = ft_itoa(vars->count);
+	mlx_string_put(vars->mlx, vars->win, 80, vars->height * 65, \
+				0x00FFFFFF, step);
 	free(step);
-	printf("Step: %d\n", vars->count);
 }
 //
 
